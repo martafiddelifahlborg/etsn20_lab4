@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class searchFile {
+public class SearchFile {
 
     //syntax of “search <pattern> <file>"
     private static int REQUIRED_ARGUMENT_LENGTH = 3;
@@ -37,11 +37,9 @@ public class searchFile {
         try {
             Pattern pattern = Pattern.compile(args[1], Pattern.CASE_INSENSITIVE);
 
-            allLines.stream().filter((s) -> {
-            Matcher matcher = pattern.matcher(s);
-            boolean matchFound = matcher.find();
-            return matchFound; 
-            }).forEach((s) -> { System.out.println(s); });
+            allLines.stream()
+            .filter(s -> pattern.matcher(s).find())
+            .forEach(System.out::println);
 
         } catch (PatternSyntaxException e) {
             printAndExit("pattern error");
